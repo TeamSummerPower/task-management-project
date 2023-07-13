@@ -7,8 +7,13 @@ Back-end:
 	Functionality:
 		/* log in/sign up/log out* /
 		add new task;
-		edit task = {title, description, deadline, priority} - not mandatory;
+		edit task:
+			title, description, deadline, priority (not mandatory);
 		delete task;
+		load tasks;
+		sort tasks:
+			by time, by priority;
+			
 
 Frond-end:
 	/* it depends on time and capabilities */
