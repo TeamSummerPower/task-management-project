@@ -1,0 +1,27 @@
+Task Managmnet Tool
+	Features:
+		- Create, Delete, Select, Sort buttons.
+		- Reccursing tasks ( the tasks that you select repeat itself how many times you want to ).
+		- Moving tasks from one selection to another.
+		- Changeble selection name.
+		- Alert for incoming task soon ( Alarm ).
+		- Page of tasks that can be used from group of people.
+		- Icons.
+		- Roles.
+	
+	Create button:
+		When you click the create button it asks you for the task title, description and if you want to be reccursing or not,
+		and you want an alarm for what hour you want it. Also you can choose the priority of the task.
+		
+	Page where can join another people:
+		Page of tasks where can join another people. Who created the page is the admin and have all the permisions, and he choose the joined people permisions.
+		Alse shows in real time who is at the page with round icont with their initials inside. When someone create task it shows who created it.
+		
+	Select button:
+		Select the tasks you want ( it can be more the one tasks ).
+		
+	Delete button:
+		Delete the tasks you've been selected.
+		
+	Sort button:
+		Sort your tasks by priority.
