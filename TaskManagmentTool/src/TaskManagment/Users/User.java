@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private static int counter = 1;
+    private int counter = 1;
     private int id;
     private String name;
     private String userName;
@@ -21,6 +21,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.newTasks = new ArrayList<>();
+        this.id = counter++;
     }
     public int getId() {
         return id;
