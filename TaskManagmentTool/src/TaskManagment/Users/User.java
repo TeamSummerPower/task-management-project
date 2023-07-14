@@ -1,4 +1,6 @@
-package TaskManagment;
+package TaskManagment.Users;
+
+import TaskManagment.Tasks.Task;
 
 import java.util.List;
 
