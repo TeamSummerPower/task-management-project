@@ -36,5 +36,11 @@ public class DataBaseManagement {
     public Task updateTask(Task task) {
         return taskRepository.save(task);
     }
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
 
 }

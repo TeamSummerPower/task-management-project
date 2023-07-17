@@ -87,4 +87,16 @@ public class AppFunctionality {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/user/updatePassword/{userId}")
+    public ResponseEntity<String> updateUserPassword(@PathVariable Long userId, @RequestBody String newPassword) {
+        Optional<User> isExists = dataBaseManagement.getUserById(userId);
+        if (isExists.isPresent()) {
+            User user = isExists.get();
+            user.setPassword(newPassword);
+            dataBaseManagement.updateUser(user);
+            return ResponseEntity.ok("Password updated successfully");
+        } else {
+            return ResponseEntity.ok("No such user found");
+        }
+    }
 }
