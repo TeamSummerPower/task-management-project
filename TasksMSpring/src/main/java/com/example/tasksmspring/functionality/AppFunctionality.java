@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("app")
 public class AppFunctionality {
     private final DataBaseManagement dataBaseManagement;
     @Autowired
     public AppFunctionality(DataBaseManagement dataBaseManagement) {
         this.dataBaseManagement = dataBaseManagement;
     }
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<Long> registerUser(@RequestBody User user) {
         boolean isUsernameTaken = dataBaseManagement.getUserByUserName(user).isPresent();
         if (!isUsernameTaken) {
@@ -27,7 +28,7 @@ public class AppFunctionality {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<Long> loginUser(@RequestBody User user) {
         Optional<User> optionalUser = dataBaseManagement.getUserByUserName(user);
         if (optionalUser.isPresent()) {
@@ -41,7 +42,7 @@ public class AppFunctionality {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-    @PostMapping("/createTask")
+    @PostMapping("/user/createTask")
     public ResponseEntity<Long> createTask(@RequestBody Task task) {
         Task newTask = dataBaseManagement.createTask(task);
         if (newTask != null) {
@@ -50,12 +51,12 @@ public class AppFunctionality {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @DeleteMapping("/deleteTasks")
+    @DeleteMapping("/user/deleteTasks")
     public ResponseEntity<String> deleteTasks(@RequestBody List<Long> taskIds) {
         dataBaseManagement.deleteTask(taskIds);
         return ResponseEntity.ok("Tasks were deleted successfully");
     }
-    @PutMapping("/updateTask/{taskId}")
+    @PutMapping("/user/updateTask/{taskId}")
     public ResponseEntity<String> updateTask(@PathVariable Long taskId, @RequestBody Task updatedTask) {
         Optional<Task> taskOptional = dataBaseManagement.getTaskById(taskId);
 
