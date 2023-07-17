@@ -1,7 +1,9 @@
 package com.example.tasksmspring.functionality;
 
 import com.example.tasksmspring.tasks.Task;
+import com.example.tasksmspring.tasks.TaskRepository;
 import com.example.tasksmspring.users.User;
+import com.example.tasksmspring.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.tasksmspring.functionality;
+package com.example.tasksmspring.users;
 
 import com.example.tasksmspring.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
