@@ -1,21 +1,46 @@
 package com.example.tasksmspring.tasks;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.example.tasksmspring.users.User;
+import jakarta.persistence.*;
 
-@JsonSerialize
+@Entity
+@Table(name = "task")
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
+    @Column(name = "is_rec")
     private boolean isRec;
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
     private Priority priority;
 
-    public Task(String title, String description, boolean isRec, int userId, Priority priority) {
+    public Task(Long id, String title, String description, boolean isRec, User user, Priority priority) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.isRec = isRec;
-        this.userId = userId;
+        this.user = user;
         this.priority = priority;
+    }
+
+    public Task() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -42,12 +67,12 @@ public class Task {
         isRec = rec;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Priority getPriority() {

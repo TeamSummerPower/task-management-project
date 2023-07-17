@@ -1,0 +1,19 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 8080
+
+spring:
+  datasource:
+    password: Garethbale123
+    url: jdbc:mysql://localhost:3306/task_list
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

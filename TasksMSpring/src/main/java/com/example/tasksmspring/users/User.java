@@ -1,52 +1,69 @@
 package com.example.tasksmspring.users;
 
-import com.example.tasksmspring.tasks.Task;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.example.tasksmspring.tasks.Priority;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@JsonSerialize
+@Entity
+@Table(name = "user")
 public class User {
-    private static int cnt = 0;
-    private int id;
-    private String name;
-    private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "username")
+    private String userName;
+    @Column(name = "password")
     private String password;
-    private Role role;
-    private List<Task> newTasks;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
+    private Priority priority;
 
-    public User(String name, String email, String password, Role role) {
-        this.id = cnt++;
-        this.name = name;
-        this.email = email;
+    public User(Long id, String firstName, String lastName, String userName, String password, Priority priority) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
         this.password = password;
-        this.role = role;
-        this.newTasks = new ArrayList<>();
+        this.priority = priority;
     }
 
-    public int getId() {
+    public User() {
+
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -57,14 +74,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public Priority getPriority() {
+        return priority;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-    public List<Task> getNewTasks() {
-        return newTasks;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

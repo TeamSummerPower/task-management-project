@@ -1,39 +1,89 @@
 package com.example.tasksmspring.functionality;
 
-import com.example.tasksmspring.users.LoginDTO;
-import com.example.tasksmspring.users.RegistrationDTO;
-import com.example.tasksmspring.users.Role;
+import com.example.tasksmspring.tasks.Task;
 import com.example.tasksmspring.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AppFunctionality {
-
+    private final DataBaseManagement dataBaseManagement;
+    @Autowired
+    public AppFunctionality(DataBaseManagement dataBaseManagement) {
+        this.dataBaseManagement = dataBaseManagement;
+    }
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody RegistrationDTO registrationDTO) {
-        User newUser = createUser(registrationDTO);
-        // register in DB
-        return ResponseEntity.ok("User has been registered successfully");
+    public ResponseEntity<Long> registerUser(@RequestBody User user) {
+        boolean isUsernameTaken = dataBaseManagement.getUserByUserName(user).isPresent();
+        if (!isUsernameTaken) {
+            User newUser = dataBaseManagement.createUser(user);
+            return ResponseEntity.ok(newUser.getId());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO) {
-        // retrieve from the DB
-        boolean bool = true;
-        if (bool) {
-            return ResponseEntity.ok("Login has been successful");
+    public ResponseEntity<Long> loginUser(@RequestBody User user) {
+        Optional<User> optionalUser = dataBaseManagement.getUserByUserName(user);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            if (existingUser.getPassword().equals(user.getPassword())) {
+                return ResponseEntity.ok(existingUser.getId());
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
     }
-    private User createUser(RegistrationDTO registrationDTO) {
-        String name = registrationDTO.getName();
-        String email = registrationDTO.getEmail();
-        String password = registrationDTO.getPassword();
-        return new User(name, email, password, Role.USER);
+    @PostMapping("/createTask")
+    public ResponseEntity<Long> createTask(@RequestBody Task task) {
+        Task newTask = dataBaseManagement.createTask(task);
+        if (newTask != null) {
+            return ResponseEntity.ok(newTask.getId());
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @DeleteMapping("/deleteTasks")
+    public ResponseEntity<String> deleteTasks(@RequestBody List<Long> taskIds) {
+        dataBaseManagement.deleteTask(taskIds);
+        return ResponseEntity.ok("Tasks were deleted successfully");
+    }
+    @PutMapping("/updateTask/{taskId}")
+    public ResponseEntity<String> updateTask(@PathVariable Long taskId, @RequestBody Task updatedTask) {
+        Optional<Task> taskOptional = dataBaseManagement.getTaskById(taskId);
+
+        if (taskOptional.isPresent()) {
+            Task existingTask = taskOptional.get();
+
+            if (updatedTask.getTitle() != null) {
+                existingTask.setTitle(updatedTask.getTitle());
+            }
+            if (updatedTask.getDescription() != null) {
+                existingTask.setDescription(updatedTask.getDescription());
+            }
+            if (updatedTask.getPriority() != null) {
+                existingTask.setPriority(updatedTask.getPriority());
+            }
+            if (updatedTask.isRec()) {
+                existingTask.setRec(updatedTask.isRec());
+            }
+
+            Task savedTask = dataBaseManagement.updateTask(existingTask);
+
+            if (savedTask != null) {
+                return ResponseEntity.ok("Task updated successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
