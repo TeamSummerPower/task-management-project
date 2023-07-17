@@ -1,5 +1,6 @@
 package com.example.tasksmspring.functionality;
 
+import com.example.tasksmspring.database.DataBaseManagement;
 import com.example.tasksmspring.tasks.Task;
 import com.example.tasksmspring.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class AppFunctionality {
     }
     @PostMapping("/user/register")
     public ResponseEntity<Long> registerUser(@RequestBody User user) {
-        boolean isUsernameTaken = dataBaseManagement.getUserByUserName(user).isPresent();
-        if (!isUsernameTaken) {
-            User newUser = dataBaseManagement.createUser(user);
-            return ResponseEntity.ok(newUser.getId());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                boolean isUsernameTaken = dataBaseManagement.getUserByUserName(user).isPresent();
+                if (!isUsernameTaken) {
+                    User newUser = dataBaseManagement.createUser(user);
+                    return ResponseEntity.ok(newUser.getId());
+                } else {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
     @PostMapping("/user/login")
@@ -59,6 +60,7 @@ public class AppFunctionality {
     @PutMapping("/user/updateTask/{taskId}")
     public ResponseEntity<String> updateTask(@PathVariable Long taskId, @RequestBody Task updatedTask) {
         Optional<Task> taskOptional = dataBaseManagement.getTaskById(taskId);
+
 
         if (taskOptional.isPresent()) {
             Task existingTask = taskOptional.get();

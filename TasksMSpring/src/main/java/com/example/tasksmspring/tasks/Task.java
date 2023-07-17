@@ -15,19 +15,18 @@ public class Task {
     private String description;
     @Column(name = "is_rec")
     private boolean isRec;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-    @Enumerated(EnumType.STRING)
+    @MapsId
+    @ManyToOne
+    private User author;
     @Column(name = "priority")
     private Priority priority;
 
-    public Task(Long id, String title, String description, boolean isRec, User user, Priority priority) {
+    public Task(Long id, String title, String description, boolean isRec, User author, Priority priority) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.isRec = isRec;
-        this.user = user;
+        this.author = author;
         this.priority = priority;
     }
 
@@ -67,12 +66,12 @@ public class Task {
         isRec = rec;
     }
 
-    public User getUser() {
-        return user;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     public Priority getPriority() {

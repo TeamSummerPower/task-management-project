@@ -1,40 +1,31 @@
 package com.example.tasksmspring.users;
 
-import com.example.tasksmspring.tasks.Priority;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "first_name")
+    private Long id;
     private String firstName;
-    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "username")
     private String userName;
-    @Column(name = "password")
     private String password;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "priority")
-    private Priority priority;
+    private Role role;
 
-    public User(Long id, String firstName, String lastName, String userName, String password, Priority priority) {
-        this.id = id;
+    public User(String firstName, String lastName, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
         this.password = password;
-        this.priority = priority;
+        this.userName = email;
     }
 
     public User() {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -58,11 +49,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUsername(String userName) {
         this.userName = userName;
     }
 
@@ -74,11 +65,11 @@ public class User {
         this.password = password;
     }
 
-    public Priority getPriority() {
-        return priority;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

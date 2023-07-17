@@ -1,4 +1,4 @@
-package com.example.tasksmspring.functionality;
+package com.example.tasksmspring.database;
 
 import com.example.tasksmspring.tasks.Task;
 import com.example.tasksmspring.tasks.TaskRepository;
@@ -30,7 +30,7 @@ public class DataBaseManagement {
         return userRepository.save(user);
     }
     public Optional<User> getUserByUserName(User user) {
-        return userRepository.findByUserName(user.getUserName());
+        return userRepository.findByUserName(user.getUsername());
     }
     public Optional<Task> getTaskById(Long id) {
         return taskRepository.findById(id);
