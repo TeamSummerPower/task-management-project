@@ -12,28 +12,27 @@ import java.util.Optional;
 @RestController
 public class UserController {
     private final UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
     @PostMapping("/user/register")
-    public ResponseEntity<Long> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
         boolean isUsernameTaken = userService.getUserByUserName(user).isPresent();
         if (!isUsernameTaken) {
             User newUser = userService.createUser(user);
-            return ResponseEntity.ok(newUser.getId());
+            return ResponseEntity.ok(String.valueOf(newUser.getId()));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
     @PostMapping("/user/login")
-    public ResponseEntity<Long> loginUser(@RequestBody User user) {
+    public ResponseEntity<String> loginUser(@RequestBody User user) {
         Optional<User> optionalUser = userService.getUserByUserName(user);
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             if (existingUser.getPassword().equals(user.getPassword())) {
-                return ResponseEntity.ok(existingUser.getId());
+                return ResponseEntity.ok(String.valueOf(existingUser.getId()));
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
