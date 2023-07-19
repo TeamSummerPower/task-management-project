@@ -47,9 +47,9 @@ function handleFormSubmit(url, formData) {
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = loginForm.querySelector('input[type="email"]').value;
+  const userName = loginForm.querySelector('input[type="email"]').value;
   const password = loginForm.querySelector('input[type="password"]').value;
-  const formData = { email, password };
+  const formData = { userName, password };
 
   handleFormSubmit("http://localhost:8080/user/login", formData)
     .then((data) => {
