@@ -6,7 +6,7 @@ const formOpenBtn = document.querySelector("#form-open"),
   loginBtn = document.querySelector("#login"),
   pwShowHide = document.querySelectorAll(".pw_hide"),
   loginForm = document.querySelector(".login_form form"),
-  signupForm = document.querySelector(".form signup_form");
+  signupForm = document.querySelector(".signup_form form");
 
 formOpenBtn.addEventListener("click", () => home.classList.add("show"));
 formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
@@ -51,7 +51,7 @@ loginForm.addEventListener("submit", (e) => {
   const password = loginForm.querySelector('input[type="password"]').value;
   const formData = { email, password };
 
-  handleFormSubmit("http://localhost:8080/user/login", formData)
+  handleFormSubmit("/login", formData)
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
@@ -76,7 +76,7 @@ signupForm.addEventListener("submit", (e) => {
 
   const formData = { email, password };
 
-  handleFormSubmit("http://localhost:8080/user/register", formData)
+  handleFormSubmit("/register", formData)
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
