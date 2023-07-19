@@ -51,7 +51,7 @@ loginForm.addEventListener("submit", (e) => {
   const password = loginForm.querySelector('input[type="password"]').value;
   const formData = { email, password };
 
-  handleFormSubmit("/login", formData)
+  handleFormSubmit("http://localhost:8080/user/login", formData)
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
@@ -65,7 +65,7 @@ loginForm.addEventListener("submit", (e) => {
 
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = signupForm.querySelector('input[type="email"]').value;
+  const userName = signupForm.querySelector('input[type="email"]').value;
   const password = signupForm.querySelector('input[type="password"]').value;
   const confirmPassword = signupForm.querySelector('input[placeholder="Confirm password"]').value;
   
@@ -74,9 +74,9 @@ signupForm.addEventListener("submit", (e) => {
     return;
   }
 
-  const formData = { email, password };
+  const formData = { userName, password };
 
-  handleFormSubmit("/register", formData)
+  handleFormSubmit("http://localhost:8080/user/register", formData)
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
