@@ -3,9 +3,9 @@ package com.example.tasksmspring.controllers;
 import com.example.tasksmspring.users.User;
 import com.example.tasksmspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.google.gson.*;
 
 import java.util.Optional;
 
@@ -13,6 +13,7 @@ import java.util.Optional;
 @CrossOrigin
 public class UserController {
     private final UserService userService;
+    private static final Gson gson = new Gson();
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -22,9 +23,9 @@ public class UserController {
         boolean isUsernameTaken = userService.getUserByUserName(user).isPresent();
         if (!isUsernameTaken) {
             User newUser = userService.createUser(user);
-            return ResponseEntity.ok(String.valueOf(newUser.getId()));
+            return ResponseEntity.ok(gson.toJson(newUser.getId()));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.ok(gson.toJson("This email is already taken!"));
         }
     }
     @PostMapping("/user/login")
@@ -33,12 +34,12 @@ public class UserController {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             if (existingUser.getPassword().equals(user.getPassword())) {
-                return ResponseEntity.ok(String.valueOf(existingUser.getId()));
+                return ResponseEntity.ok(gson.toJson(existingUser.getId()));
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                return ResponseEntity.ok(gson.toJson("Password is incorrect!"));
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.ok(gson.toJson("No such email found!"));
         }
     }
     @PutMapping("/user/updatePassword/{userId}")
@@ -48,9 +49,9 @@ public class UserController {
             User user = isExists.get();
             user.setPassword(newPassword);
             userService.updateUser(user);
-            return ResponseEntity.ok("Password updated successfully");
+            return ResponseEntity.ok(gson.toJson("Password updated successfully"));
         } else {
-            return ResponseEntity.ok("No such user found");
+            return ResponseEntity.ok(gson.toJson("No such user found"));
         }
     }
 }
