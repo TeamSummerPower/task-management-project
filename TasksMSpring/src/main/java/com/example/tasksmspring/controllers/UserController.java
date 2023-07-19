@@ -10,6 +10,7 @@ import com.google.gson.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "/user")
 @CrossOrigin
 public class UserController {
     private final UserService userService;
@@ -18,7 +19,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/user/register")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         boolean isUsernameTaken = userService.getUserByUserName(user).isPresent();
         if (!isUsernameTaken) {
@@ -28,7 +29,7 @@ public class UserController {
             return ResponseEntity.ok(gson.toJson("This email is already taken!"));
         }
     }
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody User user) {
         Optional<User> optionalUser = userService.getUserByUserName(user);
         if (optionalUser.isPresent()) {
@@ -42,7 +43,7 @@ public class UserController {
             return ResponseEntity.ok(gson.toJson("No such email found!"));
         }
     }
-    @PutMapping("/user/updatePassword/{userId}")
+    @PutMapping("/updatePassword/{userId}")
     public ResponseEntity<String> updateUserPassword(@PathVariable Long userId, @RequestBody String newPassword) {
         Optional<User> isExists = userService.getUserById(userId);
         if (isExists.isPresent()) {
