@@ -6,8 +6,8 @@ server:
 
 spring:
   datasource:
-    password: 84268426
-    url: jdbc:mysql://localhost:3306/task_management_tool
+    password: Garethbale123
+    url: jdbc:mysql://localhost:3306/task_list
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
