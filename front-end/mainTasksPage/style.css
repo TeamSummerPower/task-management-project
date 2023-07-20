@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #0b0423;
+}
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: #0b0423;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#left, #right{
+    width: 300px;
+    min-height: 579px;
+    margin: 20px;
+    border: 2px dashed #fff;
+}
+#left2, #right2{
+    width: 300px;
+    min-height: 579px;
+    margin: 20px;
+    border: 2px dashed #fff;
+}
+#today, #weekly, #monthly, #yearly{
+    width: 100%;
+    margin: 0;
+    background-color: rgb(234, 255, 0);
+}
+.list{
+    background: #e92e63;
+    height: 60px;
+    margin: 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    justify-content: center;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+}
+.list img{
+    float: left;
+    width: 10px;
+    margin-right: 15px;
+    margin-left: 20px;
+}
+.enjoy-css {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: none;
+    cursor: pointer;
+    opacity: 0.98;
+    padding: 10px;
+    border: 4px solid rgba(255,255,255,1);
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+    color: #ffffff;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #e92e63;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+    -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+.enjoy-css2 {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: none;
+    cursor: pointer;
+    opacity: 0.98;
+    margin: 0 0 0 80%;
+    padding: 10px;
+    border: 4px solid rgba(255,255,255,1);
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+    color: #ffffff;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #e92e63;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+    -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
