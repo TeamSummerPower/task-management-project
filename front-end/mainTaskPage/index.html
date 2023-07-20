@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drag&Drop</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <input type="button" onclick="addTask()" class="enjoy-css" value="[Add_New_Task]" />
+        <input type="button" class="enjoy-css2" value="Log_Out" />
+        <div class="container">
+            <div id="left">
+                <div class="list2" id="today">Today</div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+            <div id="right">
+                <div class="list2" id="weekly">Weekly</div>
+            </div>
+            <div id="left2">
+                <div class="list2" id="monthly">Monthly</div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="list" draggable="true"><img src="icon.png">
+                    <span>List item</span>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+            <div id="right2">
+                <div class="list2" id="yearly">Yearly</div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            function addTask() {
+                var taskInput = document.getElementById("taskInput");
+                var taskDescription = taskInput.value.trim();
+
+                if (taskDescription !== "") {
+                var taskList = document.getElementById("taskList");
+                var listItem = document.createElement("li");
+                listItem.className = "task-item";
+
+                var spanElement = document.createElement("span");
+                spanElement.textContent = taskDescription;
+
+                var deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "delete-btn";
+                deleteButton.onclick = function() {
+                    listItem.remove();
+                };
+
+                listItem.appendChild(spanElement);
+                listItem.appendChild(deleteButton);
+                taskList.appendChild(listItem);
+
+                taskInput.value = ""; // Clear input field after adding the task
+                }
+            }
+
+
+              // Add event listeners for edit and delete buttons
+            $(document).ready(function() {
+                $(".edit-btn").on("click", function() {
+                // Handle edit button click
+                var listItem = $(this).siblings("span");
+                var newValue = prompt("Enter the new value:", listItem.text());
+                if (newValue !== null) {
+                    listItem.text(newValue);
+                }
+                });
+
+                $(".delete-btn").on("click", function() {
+                // Handle delete button click
+                $(this).parent(".list").remove();
+                });
+            });
+
+            let lists = document.getElementsByClassName("list");
+            let rightBox = document.getElementById("right");
+            let leftBox = document.getElementById("left");
+
+            for(list of lists){
+                list.addEventListener("dragstart", function(e){
+                    let selected = e.target;
+
+                    rightBox.addEventListener("dragover", function(e){
+                        e.preventDefault();
+                    });
+                    rightBox.addEventListener("drop", function(e){
+                        rightBox.appendChild(selected);
+                        selected = null;
+                    });
+                    leftBox.addEventListener("dragover", function(e){
+                        e.preventDefault();
+                    });
+                    leftBox.addEventListener("drop", function(e){
+                        leftBox.appendChild(selected);
+                        selected = null;
+                    });
+                })
+            }
+            let lists2 = document.getElementsByClassName("list");
+            let rightBox2 = document.getElementById("right2");
+            let leftBox2 = document.getElementById("left2");
+
+            for(list of lists2){
+                list.addEventListener("dragstart", function(e){
+                    let selected = e.target;
+
+                    rightBox2.addEventListener("dragover", function(e){
+                        e.preventDefault();
+                    });
+                    rightBox2.addEventListener("drop", function(e){
+                        rightBox2.appendChild(selected);
+                        selected = null;
+                    });
+                    leftBox2.addEventListener("dragover", function(e){
+                        e.preventDefault();
+                    });
+                    leftBox2.addEventListener("drop", function(e){
+                        leftBox2.appendChild(selected);
+                        selected = null;
+                    });
+                })
+            }
+            function lines(){
+                let sizeW = Math.random() * 12;
+                let duration = Math.random() * 3;
+                let e = document.createElement('div');
+                e.setAttribute('class', 'circle');
+                ducument.body.appendChild(e);
+                e.style.width = 2 + sizeW + 'px';
+                e.style.left = Math.random() * + innerWidth + 'px';
+                e.style.animationDuration = 2 + duration + 's'; 
+
+                setTimeout(function(){
+                    document.body.removeChild(e)
+                },5000);
+            }
+
+            setInterval(function(){
+                lines();
+            },200);
+            
+        </script>
+    </body>
+</html>
