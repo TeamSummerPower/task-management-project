@@ -1,0 +1,170 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #0b0423;
+    height: 100vh;
+    overflow: hidden;
+}
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: #0b0423;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#left, #right{
+    width: 300px;
+    min-height: 579px;
+    margin: 20px;
+    border: 4px dashed #fff;
+}
+#left2, #right2{
+    width: 300px;
+    min-height: 579px;
+    margin: 20px;
+    border: 4px dashed #fff;
+}
+#today, #weekly, #monthly, #yearly{
+    width: 100%;
+    margin: 0;
+    background-color: rgb(234, 255, 0);
+}
+.list{
+    background: #e92e63;
+    height: 60px;
+    margin: 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    justify-content: center;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+}
+.list2{
+    background: #e92e63;
+    height: 60px;
+    margin: 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    justify-content: center;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+    color: rgba(0,0,0,0.9);
+}
+.list img{
+    float: left;
+    width: 10px;
+    margin-right: 15px;
+}
+.enjoy-css {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: none;
+    cursor: pointer;
+    opacity: 0.98;
+    padding: 10px;
+    border: 4px solid rgba(255,255,255,1);
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+    color: #000000.9;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #e92e63;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+    -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+.enjoy-css2 {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: none;
+    cursor: pointer;
+    opacity: 0.98;
+    margin: 0 0 0 80%;
+    padding: 10px;
+    border: 4px solid rgba(255,255,255,1);
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    font: normal normal bold 15px/normal "Comic Sans MS", cursive, sans-serif;
+    color: #000000.9;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #e92e63;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+    -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+.circle{
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    aspect-ratio: 1/1;
+    background: #0f0;
+    box-shadow: 0 0 10px #0f0,
+    0 0 20px #0f0,
+    0 0 30px #0f0,
+    0 0 50px #0f0;
+    border-radius: 50%;
+    animation: animate 5s linear forwards;
+}
+@keyframes animate{
+    0%
+    {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+.circle::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    width: 50%;
+    height: 100vh;
+    opacity: 0.5;
+    background: linear-gradient(#0f0, transparent);
+}
+.edit-btn,
+.delete-btn {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    cursor: pointer;
+    padding: 10px 8px;
+    border: none;
+    font: normal normal bold 12px/normal "Comic Sans MS", cursive, sans-serif;
+    color: rgba(0,0,0,0.9);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #e92e63;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+    -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
