@@ -7,6 +7,9 @@ const formOpenBtn = document.querySelector("#form-open"),
   pwShowHide = document.querySelectorAll(".pw_hide"),
   loginForm = document.querySelector(".login_form form"),
   signupForm = document.querySelector(".signup_form form");
+  const errorMessageLogin = document.getElementById("errorMessageLogin");
+  const errorMessageSignUp = document.getElementById("errorMessageSignUp");
+  const closeButton = document.getElementById("closeButton");
 
 formOpenBtn.addEventListener("click", () => home.classList.add("show"));
 formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
@@ -24,12 +27,20 @@ pwShowHide.forEach((icon) => {
   });
 });
 
+closeButton.addEventListener("click", () => {
+  loginForm.reset();
+  signupForm.reset();
+  errorMessageLogin.textContent = "";
+  errorMessageSignUp.textContent = "";
+});
+
 signupBtn.addEventListener("click", (e) => {
   e.preventDefault();
   formContainer.classList.add("active");
 });
 
 loginBtn.addEventListener("click", (e) => {
+  errorMessageLogin.textContent = "";
   e.preventDefault();
   formContainer.classList.remove("active");
 });
@@ -55,7 +66,14 @@ loginForm.addEventListener("submit", (e) => {
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
-      console.log(data);
+      if (typeof data === "number") {
+        // sending you to the main page
+        // last line could be removed after we have the main page
+        errorMessageLogin.textContent = "";
+        console.log(data);
+      } else {
+        errorMessageLogin.textContent = data;
+      }
     })
     .catch((error) => {
       // Handle errors that may occur during the login process
@@ -70,7 +88,7 @@ signupForm.addEventListener("submit", (e) => {
   const confirmPassword = signupForm.querySelector('input[placeholder="Confirm password"]').value;
   
   if (password !== confirmPassword) {
-    console.error("Passwords do not match.");
+    errorMessageSignUp.textContent = "Passwords do not match";
     return;
   }
 
@@ -80,7 +98,14 @@ signupForm.addEventListener("submit", (e) => {
     .then((data) => {
       // Process the response from the backend (data) as needed
       // For example, display success message, redirect to a new page, etc.
-      console.log(data);
+      if (typeof data === "number") {
+        // sending you to the main page
+        // last line could be removed after we have the main page
+        errorMessageSignUp.textContent = "";
+        console.log(data);
+      } else {
+        errorMessageSignUp.textContent = data;
+      }
     })
     .catch((error) => {
       // Handle errors that may occur during the registration process
