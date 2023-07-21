@@ -7,7 +7,7 @@
     </head>
     <body>
         <input type="button" onclick="addTask()" class="enjoy-css" value="[Add_New_Task]" />
-        <input type="button" onclick="goBack()" class="enjoy-css2" value="Log_Out" />
+        <input type="button" class="enjoy-css2" value="Log_Out" />
         <div class="container">
             <div id="left">
                 <div class="list2" id="today">Today</div>
@@ -15,6 +15,11 @@
                     <span>List item</span>
                     <button class="edit-btn">Edit</button>
                     <button class="delete-btn">Delete</button>
+                </div>
+                <!-- Add the new task description field, input, and ul here -->
+                <div id="task-container">
+                    <input type="text" id="taskInput" placeholder="Enter task description" />
+                    <ul id="taskList"></ul>
                 </div>
                 <div class="list" draggable="true"><img src="icon.png">
                     <span>List item</span>
@@ -64,121 +69,112 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            function goBack() {
-                window.location.href = "../index.html";
-            }
             function addTask() {
                 var taskInput = document.getElementById("taskInput");
                 var taskDescription = taskInput.value.trim();
 
                 if (taskDescription !== "") {
-                var taskList = document.getElementById("taskList");
-                var listItem = document.createElement("li");
-                listItem.className = "task-item";
+                    var taskList = document.getElementById("taskList");
+                    var listItem = document.createElement("li");
+                    listItem.className = "list";
 
-                var spanElement = document.createElement("span");
-                spanElement.textContent = taskDescription;
+                    var spanElement = document.createElement("span");
+                    spanElement.textContent = taskDescription;
 
-                var deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.className = "delete-btn";
-                deleteButton.onclick = function() {
-                    listItem.remove();
-                };
+                    var deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.className = "delete-btn";
+                    deleteButton.onclick = function() {
+                        listItem.remove();
+                    };
 
-                listItem.appendChild(spanElement);
-                listItem.appendChild(deleteButton);
-                taskList.appendChild(listItem);
+                    listItem.appendChild(spanElement);
+                    listItem.appendChild(deleteButton);
+                    taskList.appendChild(listItem);
 
-                taskInput.value = ""; // Clear input field after adding the task
+                    taskInput.value = ""; // Clear input field after adding the task
                 }
             }
+
 
 
               // Add event listeners for edit and delete buttons
             $(document).ready(function() {
                 $(".edit-btn").on("click", function() {
-                // Handle edit button click
-                var listItem = $(this).siblings("span");
-                var newValue = prompt("Enter the new value:", listItem.text());
-                if (newValue !== null) {
+                    // Handle edit button click
+                    var listItem = $(this).siblings("span");
+                    var newValue = prompt("Enter the new value:", listItem.text());
+                    if (newValue !== null) {
                     listItem.text(newValue);
-                }
+                    }
                 });
 
                 $(".delete-btn").on("click", function() {
-                // Handle delete button click
-                $(this).parent(".list").remove();
+                    // Handle delete button click
+                    $(this).parent(".list").remove();
                 });
-            });
 
-            let lists = document.getElementsByClassName("list");
-            let rightBox = document.getElementById("right");
-            let leftBox = document.getElementById("left");
+                let lists = document.getElementsByClassName("list");
+                let rightBox = document.getElementById("right");
+                let leftBox = document.getElementById("left");
 
-            for(list of lists){
-                list.addEventListener("dragstart", function(e){
+                for (list of lists) {
+                    list.addEventListener("dragstart", function(e) {
                     let selected = e.target;
 
-                    rightBox.addEventListener("dragover", function(e){
+                    rightBox.addEventListener("dragover", function(e) {
                         e.preventDefault();
                     });
-                    rightBox.addEventListener("drop", function(e){
+
+                    rightBox.addEventListener("drop", function(e) {
+                        e.preventDefault();
                         rightBox.appendChild(selected);
                         selected = null;
                     });
-                    leftBox.addEventListener("dragover", function(e){
+
+                    leftBox.addEventListener("dragover", function(e) {
                         e.preventDefault();
                     });
-                    leftBox.addEventListener("drop", function(e){
+
+                    leftBox.addEventListener("drop", function(e) {
+                        e.preventDefault();
                         leftBox.appendChild(selected);
                         selected = null;
                     });
-                })
-            }
-            let lists2 = document.getElementsByClassName("list");
-            let rightBox2 = document.getElementById("right2");
-            let leftBox2 = document.getElementById("left2");
+                    });
+                }
 
-            for(list of lists2){
-                list.addEventListener("dragstart", function(e){
+                let lists2 = document.getElementsByClassName("list");
+                let rightBox2 = document.getElementById("right2");
+                let leftBox2 = document.getElementById("left2");
+
+                for (list of lists2) {
+                    list.addEventListener("dragstart", function(e) {
                     let selected = e.target;
 
-                    rightBox2.addEventListener("dragover", function(e){
+                    rightBox2.addEventListener("dragover", function(e) {
                         e.preventDefault();
                     });
-                    rightBox2.addEventListener("drop", function(e){
+
+                    rightBox2.addEventListener("drop", function(e) {
+                        e.preventDefault();
                         rightBox2.appendChild(selected);
                         selected = null;
                     });
-                    leftBox2.addEventListener("dragover", function(e){
+
+                    leftBox2.addEventListener("dragover", function(e) {
                         e.preventDefault();
                     });
-                    leftBox2.addEventListener("drop", function(e){
+
+                    leftBox2.addEventListener("drop", function(e) {
+                        e.preventDefault();
                         leftBox2.appendChild(selected);
                         selected = null;
                     });
-                })
-            }
-            function lines(){
-                let sizeW = Math.random() * 12;
-                let duration = Math.random() * 3;
-                let e = document.createElement('div');
-                e.setAttribute('class', 'circle');
-                ducument.body.appendChild(e);
-                e.style.width = 2 + sizeW + 'px';
-                e.style.left = Math.random() * + innerWidth + 'px';
-                e.style.animationDuration = 2 + duration + 's'; 
+                    });
+                }
+                });
 
-                setTimeout(function(){
-                    document.body.removeChild(e)
-                },5000);
-            }
-
-            setInterval(function(){
-                lines();
-            },200);
-            
         </script>
     </body>
 </html>
