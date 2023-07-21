@@ -168,3 +168,19 @@ body{
     -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
     transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
 }
+#task-container{
+    max-height: 200px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if the content exceeds the max height */
+}
+  
+#taskList{
+    margin: 0; /* Remove default margin from the list to keep tasks at the bottom */
+}
+  
+#left,
+#right,
+#left2,
+#right2{
+    position: sticky;
+    top: 0;
+}
