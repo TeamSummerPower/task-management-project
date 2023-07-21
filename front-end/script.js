@@ -70,6 +70,7 @@ loginForm.addEventListener("submit", (e) => {
         // sending you to the main page
         // last line could be removed after we have the main page
         errorMessageLogin.textContent = "";
+        window.location.href = "mainTaskPage/index.html";
         console.log(data);
       } else {
         errorMessageLogin.textContent = data;
@@ -102,6 +103,7 @@ signupForm.addEventListener("submit", (e) => {
         // sending you to the main page
         // last line could be removed after we have the main page
         errorMessageSignUp.textContent = "";
+        window.location.href = "mainTaskPage/index.html";
         console.log(data);
       } else {
         errorMessageSignUp.textContent = data;
