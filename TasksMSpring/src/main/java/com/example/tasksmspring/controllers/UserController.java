@@ -43,13 +43,13 @@ public class UserController {
             return ResponseEntity.ok(gson.toJson("No such email found!"));
         }
     }
-    @PutMapping("/updatePassword/{userId}")
-    public ResponseEntity<String> updateUserPassword(@PathVariable Long userId, @RequestBody String newPassword) {
-        Optional<User> isExists = userService.getUserById(userId);
+    @PutMapping("/forgotPassword")
+    public ResponseEntity<String> forgotUserPassword(@RequestBody User user) {
+        Optional<User> isExists = userService.getUserByUserName(user);
         if (isExists.isPresent()) {
-            User user = isExists.get();
-            user.setPassword(newPassword);
-            userService.updateUser(user);
+            User existingUser = isExists.get();
+            existingUser.setPassword(user.getPassword());
+            userService.updateUser(existingUser);
             return ResponseEntity.ok(gson.toJson("Password updated successfully"));
         } else {
             return ResponseEntity.ok(gson.toJson("No such user found"));
