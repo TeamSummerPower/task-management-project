@@ -17,3 +17,21 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  mvc:
+    cors:
+      allowed-origins:
+        - "http://localhost:8000"
+      allowed-methods:
+        - GET
+        - POST
+        - PATCH
+        - PUT
+        - DELETE
+        - OPTIONS
+        - HEAD
+      max-age: 3600
+      allowed-headers:
+        - "*"
+      exposed-headers:
+        - "X-Get-Header"
+

@@ -3,7 +3,9 @@ package com.example.tasksmspring.controllers;
 import com.example.tasksmspring.users.User;
 import com.example.tasksmspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.*;
 
@@ -23,6 +25,9 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         boolean isUsernameTaken = userService.getUserByUserName(user).isPresent();
         if (!isUsernameTaken) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String securePassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(securePassword);
             User newUser = userService.createUser(user);
             return ResponseEntity.ok(gson.toJson(newUser.getId()));
         } else {

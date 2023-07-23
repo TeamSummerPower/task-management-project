@@ -48,9 +48,9 @@ loginBtn.addEventListener("click", (e) => {
 // Function to handle form submissions
 function handleFormSubmit(url, formData) {
   return fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(formData),
   }).then((response) => response.json());
